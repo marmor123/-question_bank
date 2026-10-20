@@ -1,0 +1,21 @@
+# Dependencies and generated builds
+**/node_modules/
+**/dist/
+**/dist-ssr/
+*.log
+
+# Local source materials, datasets, and generated review artifacts
+/data/
+/pdfs/
+/new_source/
+/output/
+/scratch/
+/app/public/data
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local
+.firebase/
+.DS_Store

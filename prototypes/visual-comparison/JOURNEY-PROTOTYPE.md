@@ -12,9 +12,13 @@ python -m http.server 8769 --bind 127.0.0.1 --directory prototypes/visual-compar
 
 Open http://127.0.0.1:8769/journey-prototype.html.
 
-Choose the keeper's house or old lookout. Continue after the encounter placeholder, select the lantern clearing, then the gate. Both branches reconnect. The menu pauses travel and allows restart. Reduced-motion preference skips travel animation. Switching away pauses travel until returning through the menu.
+Tap any sandy path or clearing to walk there. Drag the map to reveal distant places, then tap reachable ground there; the camera returns to following the walking hero. “Return to hero” recenters without issuing movement. Tapping blocked ground leaves the current movement unchanged. Named landmark buttons remain available when onscreen. Both branches reconnect.
 
-The user has chosen a direction, not accepted this specific composition. Houses, names, scene density, controls, path shape, camera offset and travel speed are proposals. Encounters are placeholders. There are no questions, battles, rewards, durable saves, offline installer, direct movement controls or production engine selection. The existing clean question screen remains the baseline.
+Movement uses a small grid pathfinder limited to the authored paths and clearings; houses, scenery props and fences are blocked. A new tap can reroute movement, completing the current tile-edge segment before taking the new path. The menu pauses travel and allows restart. Reduced-motion preference skips travel animation. Switching away pauses travel until returning through the menu.
+
+The user liked the close-up world presentation and requested ground-tap movement to reach places beyond the screen. They agreed to try bounded movement along paths and small clearings, drag-to-look, and return-to-hero. These new controls still await human evaluation. Houses, names, scene density, path shape, camera offset and travel speed remain proposals.
+
+Encounters are placeholders. Walking around does not validate encounter order or progression gating: that behavior remains undecided. There are no questions, battles, rewards, durable saves, offline installer or production engine selection. The existing clean question screen remains the baseline; unrestricted exploration is not selected.
 
 ## Reuse
 

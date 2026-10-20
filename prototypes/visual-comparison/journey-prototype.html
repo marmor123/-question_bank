@@ -9,11 +9,12 @@
 button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff6b3;outline-offset:3px}
 .intro{max-width:760px;margin:18px auto 12px;padding:0 16px;display:flex;gap:14px;align-items:center;justify-content:space-between}.intro p{margin:0;font-size:12px;color:#bac9b3}.intro strong{font-size:16px}
 .shell{position:relative;width:min(100%,460px);margin:auto;background:#7fbc63;overflow:hidden;isolation:isolate;box-shadow:0 12px 60px #0005}
-canvas{width:100%;height:auto;display:block;image-rendering:pixelated;aspect-ratio:240/336}
+canvas{width:100%;height:auto;display:block;image-rendering:pixelated;aspect-ratio:240/336;touch-action:none;cursor:crosshair}
 .hud{position:absolute;inset:10px 10px auto;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;pointer-events:none}
 .heroHud{background:#263e2ef2;border:2px solid #aeb785;box-shadow:0 3px 0 #26352b;display:flex;gap:9px;padding:6px 10px;color:#fff1c5;align-items:center}.portrait{width:32px;height:32px;background:url(assets/tiny-dungeon.png);background-size:384px 352px;background-position:0 -256px;image-rendering:pixelated}
 .heroHud small{font-size:11px;color:#d1dbb4;display:block}.heroHud strong{font-size:13px;display:block}.menu{pointer-events:auto;width:42px;height:42px;border:2px solid #aeb785;background:#263e2ef2;color:#fff1c5;font-size:21px}
 .location{position:absolute;top:70px;left:50%;transform:translateX(-50%);color:#ffefc1;background:#314632db;border:1px solid #bac58b;padding:3px 12px;font:14px Georgia,serif;white-space:nowrap;pointer-events:none}
+.recenter{position:absolute;right:10px;top:106px;z-index:2;min-height:44px;padding:7px 10px;border:2px solid #c5c18c;background:#263e2ef2;color:#fff1c5}
 .destinations{position:absolute;inset:0;pointer-events:none}.destination{position:absolute;transform:translate(-50%,-100%);pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;border:0;color:#fff6d7;text-shadow:0 2px #253529;font-size:12px;min-width:80px;min-height:52px;padding:5px}
 .destination .badge{background:#293d2cf2;border:2px solid #d1cb90;padding:4px 8px;box-shadow:0 3px #203124;white-space:nowrap}.destination .tip{color:#fff0aa;font-size:20px;line-height:1}
 .destination:hover .badge,.destination:focus-visible .badge{background:#536a3c;border-color:#fff2bd}
@@ -31,15 +32,16 @@ canvas{width:100%;height:auto;display:block;image-rendering:pixelated;aspect-rat
 <body>
 <header class="intro"><div><strong>A journey through Mossgate</strong><p>Disposable map study · Actual Kenney art · No saved progress</p></div></header>
 <main class="shell" aria-label="Close-up journey through a branching woodland route">
-<canvas id="map" width="240" height="336" aria-label="Pixel-art woodland, houses and paths. Select a marked destination to move the hero along its path."></canvas>
+<canvas id="map" width="240" height="336" aria-label="Tap a path or clearing to walk there. Drag the map to look ahead. Named destination buttons also support keyboard travel."></canvas>
 <div class="hud"><div class="heroHud"><div class="portrait" aria-hidden="true"></div><div><strong>Lantern keeper</strong><small>Map appearance study</small></div></div><button class="menu" id="menu" aria-label="Open journey menu">☰</button></div>
 <div class="location">Mossgate woodland</div>
+<button class="recenter" id="recenter" hidden>Return to hero</button>
 <div class="destinations" id="destinations" aria-label="Available destinations"></div>
 <section class="bottom" aria-live="polite"><h1 id="heading">A fork in the woodland</h1><p id="description">Visit the keeper’s house or explore the old lookout.</p><small id="hint">Tap a destination in the world. Your hero follows the path.</small><button id="continue" hidden>Continue the journey</button></section>
 <section class="modal" id="modal" aria-label="Journey menu" hidden><h2>Your journey</h2><p id="where">At the woodland entrance.</p><p class="muted">This example tests scenery, camera movement and destination selection. Encounters are placeholders.</p><button id="reset">Restart map example</button><button id="close">Return to journey</button></section>
 </main>
-<footer class="footer">Try either branch, then follow it to the gate. Question screens remain clean and separate.
-<details><summary>Prototype scope and credits</summary><p>Kenney Tiny Town 1.1 and Tiny Dungeon 1.0, CC0. Terrain layout, marker controls and movement are authored for this throwaway study. No Pokémon assets or code are used. This is an authored route, not direct free movement. No combat, rewards, saves or offline installer is implemented.</p><p><a href="assets/Tiny-Town-LICENSE.txt">Tiny Town license</a> · <a href="assets/Tiny-Dungeon-LICENSE.txt">Tiny Dungeon license</a></p><p id="state"></p></details>
+<footer class="footer">Tap paths and sandy clearings to walk. Drag the map to look ahead, then tap a distant path. “Return to hero” restores the following camera.
+<details><summary>Prototype scope and credits</summary><p>Kenney Tiny Town 1.1 and Tiny Dungeon 1.0, CC0. Terrain layout, marker controls and movement are authored for this throwaway study. No Pokémon assets or code are used. Bounded tap-to-walk is an experiment; movement is limited to paths and clearings. Encounter gating is not tested. No combat, rewards, saves or offline installer is implemented.</p><p><a href="assets/Tiny-Town-LICENSE.txt">Tiny Town license</a> · <a href="assets/Tiny-Dungeon-LICENSE.txt">Tiny Dungeon license</a></p><p id="state"></p></details>
 </footer>
 <script src="journey-prototype.js"></script>
 </body>

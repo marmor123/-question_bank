@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- THROWAWAY: compare clean reading panel vs fantasy journal, ?variant=A|B.
+     Fictional nonmedical fixture; in-memory state; no production integration. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Question screen — two treatments</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101c23;color:#eff3ef;font:16px/1.6 system-ui,sans-serif}
+button{font:inherit;cursor:pointer}button:focus-visible,summary:focus-visible{outline:3px solid #3095cf;outline-offset:4px}
+.prototype{max-width:960px;margin:24px auto 18px;padding:0 20px;color:#d1dcdd}
+.prototype h1{font-size:22px;margin:0}.prototype p{margin:5px 0;font-size:14px}
+.phone{width:min(100% - 24px,430px);margin:0 auto 120px;min-height:780px;background:#f5f7f8;color:#23323a;box-shadow:0 18px 70px #0005}
+.gamehead{background:#20363c;color:#e4f0eb;padding:15px 20px;display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.gamename{font-weight:650}.paused{color:#b9dbce}.stakes{padding:15px 22px;background:#e3ecea;font-size:14px;border-bottom:1px solid #cad7d2}
+.stakes strong{display:block}.chapter{display:none}.page{padding:24px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#607278}
+h2{font-size:24px;line-height:1.25;margin:10px 0 18px}.stem p{margin:0 0 16px}
+.fixture{font-size:12px;color:#66777d;margin:0 0 16px}.prompt{font-weight:650}
+.answers{display:grid;gap:10px}.answer{display:flex;gap:12px;align-items:flex-start;text-align:left;background:#fff;color:#25323b;border:1px solid #c4ced3;border-radius:9px;padding:13px;min-height:52px}
+.answer .letter{display:grid;place-items:center;flex:0 0 27px;height:27px;background:#edf1f3;border-radius:5px;font-weight:650}
+.answer[aria-pressed=true]{border:2px solid #287b76;padding:12px;background:#e4f2ee}
+.answer:disabled{cursor:default;opacity:1}.answer.correct{border:2px solid #2c7856;padding:12px;background:#e5f3e8}
+.answer.wrong{border:2px solid #ab4e40;padding:12px;background:#f9e9e2}
+.primary{display:block;width:100%;padding:13px 14px;margin-top:20px;border:0;border-radius:8px;background:#23645f;color:#fff;font-weight:650}
+.primary:disabled{background:#d8e0e1;color:#6a7d80;cursor:default}.quiet{margin:12px 0 0;text-align:center;color:#687a7d;font-size:12px}
+.feedback{margin-top:20px;padding:17px;background:#e4efe9;border-left:3px solid #387758}.feedback h3{margin:0 0 8px;font-size:18px}.feedback p{margin:0 0 12px}
+details{border-top:1px solid #b8cec2;padding-top:12px}summary{cursor:pointer;font-weight:600}details p{padding-top:12px}
+.return{padding:50px 24px;text-align:center}.return h2{margin-top:30px}.return .symbol{font-size:50px}
+.switcher{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);width:min(94%,470px);display:flex;align-items:center;gap:8px;padding:8px;background:#fff;color:#202c36;border:1px solid #d8e2e6;border-radius:14px;box-shadow:0 4px 30px #0006;z-index:5}
+.switcher button{width:44px;height:44px;background:#eaf0f2;border:0;border-radius:8px;flex-shrink:0}.switcher .label{flex:1;text-align:center;font-size:14px}.switcher small{display:block;font-size:11px;color:#586c74}
+.state{font-size:12px;text-align:center;margin-top:10px;color:#617279}
+.fantasy.phone{background:#27332c;padding-bottom:14px;color:#3f3425;border:6px solid #4e4934;outline:1px solid #93815b}
+.fantasy .gamehead{background:#27332c;padding:12px 12px 15px;color:#f3e0b0;border-bottom:1px solid #6f7554}
+.fantasy .chapter{display:flex;align-items:center;justify-content:center;gap:12px;padding:20px 8px 15px;color:#ead19b;font-family:Georgia,serif;letter-spacing:.09em}
+.fantasy .chapter:before,.fantasy .chapter:after{content:"";width:32px;border-top:1px solid #b39c69}
+.fantasy .stakes{margin:0 13px;padding:12px 15px;background:#394d3f;border:1px solid #7c8e66;color:#efe4bf;text-align:center}
+.fantasy .stakes strong{font-family:Georgia,serif;font-size:18px}
+.fantasy .page{margin:16px 12px 0;padding:24px 19px;background:repeating-linear-gradient(0deg,#ffffff04 0 2px,#80673606 2px 4px),#eee0ba;border:1px solid #bda778;box-shadow:inset 5px 0 0 #cfbc8e,inset -5px 0 0 #cfbc8e}
+.fantasy h2{font-family:Georgia,serif;font-weight:normal;text-align:center;font-size:29px;color:#433322;border-bottom:1px solid #b7a17b;padding-bottom:17px}
+.fantasy .eyebrow{text-align:center;color:#76613e}.fantasy .fixture{color:#76613e}
+.fantasy .answers{gap:0;border-top:1px solid #c5b184}
+.fantasy .answer{border:0;border-bottom:1px solid #c5b184;background:transparent;border-radius:0;padding:14px 2px;color:#433725}
+.fantasy .answer .letter{background:#dbc796;border:1px solid #aa8e57;border-radius:0;font-family:Georgia,serif}
+.fantasy .answer[aria-pressed=true]{background:#dccb9d;box-shadow:inset 3px 0 #695937;padding-left:9px}
+.fantasy .answer.correct{background:#d5dfb6;padding-left:9px}.fantasy .answer.wrong{background:#e7c8ab;padding-left:9px}
+.fantasy .primary{background:#384f3a;color:#fff0c8;border:2px solid #9c895c;border-radius:0;box-shadow:0 3px #574c32;font-family:Georgia,serif}
+.fantasy .primary:disabled{background:#c1b38f;color:#5d543e;box-shadow:none}
+.fantasy .quiet,.fantasy .state{color:#6c5e42}.fantasy .feedback{background:#e0d9b4;border-color:#6c7d48}.fantasy details{border-color:#b8a779}
+.fantasy .return{color:#f3e0b0}.fantasy .return h2{color:#f3e0b0}
+[hidden]{display:none!important}
+@media(max-width:450px){.prototype{margin-top:15px;padding:0 14px}.prototype h1{font-size:19px}.page{padding:20px}.phone{width:calc(100% - 16px)}}
+@media(prefers-reduced-motion:no-preference){.feedback{animation:appear .18s ease-out}@keyframes appear{from{transform:translateY(6px);opacity:.3}to{transform:translateY(0);opacity:1}}}
+</style>
+</head>
+<body>
+<header class="prototype"><h1>Two ways to read within the adventure</h1><p>Disposable visual comparison · Same question and behavior · Fictional, nonmedical content</p></header>
+<main class="phone" id="phone">
+<div class="gamehead"><span class="gamename">Mossgate · Guardian</span><span class="paused">Battle paused</span></div>
+<div class="chapter">THE WAYFARER’S JOURNAL</div>
+<div class="stakes"><strong>Power your ward</strong>Correct: stronger ward · Incorrect: reduced ward</div>
+<section class="page" id="question">
+<div class="eyebrow">Boss question phase · Attempt required</div>
+<h2>The lantern keeper’s note</h2>
+<p class="fixture">Fictional reading fixture — not medical study material</p>
+<div class="stem">
+<p>You reach Mossgate at dusk. The keeper has left three lanterns beside a sealed archway: one blue, one amber, and one green. A note describes how the gate’s protective ward responds to them.</p>
+<p>“The blue lantern lights the path but cannot open the gate. The amber lantern opens it only after the bell has rung. The green lantern opens it whenever the stream is quiet. If the bell rings while the stream is loud, every lantern remains locked until morning.”</p>
+<p>The stream is quiet tonight. The bell’s rope is broken, and nobody has rung it. You may light only one lantern before the guardian returns.</p>
+<p class="prompt">Which lantern can open the gate under these conditions?</p>
+</div>
+<div class="answers" id="answers"></div>
+<button class="primary" id="submit" disabled>Confirm answer</button>
+<p class="quiet" id="quiet">Take your time. Combat stays paused while you read.</p>
+<section class="feedback" id="feedback" aria-live="polite" hidden></section>
+<div class="state" id="state">No answer selected · Battle paused</div>
+</section>
+<section class="return" id="returned" hidden><div class="symbol" aria-hidden="true">✦</div><h2 id="effect"></h2><p>Back to the battle</p><p>End of this screen comparison.</p><button class="primary" id="reset">Try the question again</button></section>
+</main>
+<nav class="switcher" aria-label="Prototype appearance"><button id="prev" aria-label="Previous appearance">←</button><div class="label" id="variantLabel"></div><button id="next" aria-label="Next appearance">→</button></nav>
+<script>
+const choices=['The blue lantern','The amber lantern','The green lantern','None of the lanterns','All three lanterns'];
+let variant=new URLSearchParams(location.search).get('variant')==='B'?'B':'A',selected=null,submitted=false;
+const $=id=>document.getElementById(id);
+function applyVariant(){
+ $('phone').classList.toggle('fantasy',variant==='B');
+ $('variantLabel').innerHTML=(variant==='A'?'A · Clean reading panel':'B · Fantasy field journal')+'<small>← → to compare · Answer state preserved</small>';
+ const url=new URL(location.href);url.searchParams.set('variant',variant);history.replaceState(null,'',url);
+}
+function drawChoices(){
+ $('answers').replaceChildren();
+ choices.forEach((text,i)=>{
+  const b=document.createElement('button');b.className='answer';b.setAttribute('aria-pressed',String(selected===i));b.disabled=submitted;
+  if(submitted&&i===2)b.classList.add('correct');if(submitted&&selected===i&&i!==2)b.classList.add('wrong');
+  b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span>'+text+(submitted&&i===2?' — correct':'')+'</span>';
+  b.onclick=()=>{selected=i;drawChoices();$('submit').disabled=false;$('state').textContent='Answer '+String.fromCharCode(65+i)+' selected · Battle paused';};
+  $('answers').append(b);
+ });
+}
+$('submit').onclick=()=>{
+ if(selected===null)return;submitted=true;drawChoices();$('submit').hidden=true;$('quiet').hidden=true;
+ $('feedback').hidden=false;
+ $('feedback').innerHTML='<h3>'+(selected===2?'Correct · Stronger ward ready':'Not quite · Reduced ward ready')+'</h3><p>The green lantern needs a quiet stream; it does not require the bell.</p><details><summary>Full explanation</summary><p>The stream is quiet, so the green lantern’s condition is met. Blue cannot open the gate. Amber needs a bell that has not rung. The final locking rule does not apply because the bell has not rung and the stream is not loud.</p></details><button class="primary" id="continue">Continue to battle</button>';
+ $('state').textContent='Answer reviewed · Battle paused until Continue';
+ $('continue').onclick=()=>{$('question').hidden=true;$('returned').hidden=false;$('effect').textContent=selected===2?'Stronger ward released':'Reduced ward released';document.querySelector('.paused').textContent='Battle resumed';};
+ $('feedback').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+};
+$('reset').onclick=()=>{selected=null;submitted=false;drawChoices();$('question').hidden=false;$('returned').hidden=true;$('feedback').hidden=true;$('submit').hidden=false;$('submit').disabled=true;$('quiet').hidden=false;$('state').textContent='No answer selected · Battle paused';document.querySelector('.paused').textContent='Battle paused';};
+function toggle(){variant=variant==='A'?'B':'A';applyVariant()}
+$('prev').onclick=toggle;$('next').onclick=toggle;
+document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key)||e.target.closest('input,textarea,select,[contenteditable]'))return;e.preventDefault();toggle()});
+drawChoices();applyVariant();
+</script>
+</body>
+</html>

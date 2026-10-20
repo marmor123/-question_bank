@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First adventure · disposable combat playtest</title>
+<link rel="stylesheet" href="combat.css">
+<main>
+  <header class="intro"><span class="eyebrow">Throwaway playtest · one hero</span><h1>A light in the ruins</h1><p>Try a short adventure. Notice whether the questions feel like a welcome pause.</p></header>
+  <section class="phone" aria-label="Adventure playtest">
+    <header class="hud"><strong>Lantern expedition</strong><span id="rewards"></span></header>
+    <div id="screen"></div>
+  </section>
+  <aside><p><strong>Fictional training questions.</strong> These test reading and feedback, not medical knowledge. All numbers, wording and battle timing are provisional.</p>
+    <details><summary>Playtest controls and current state</summary><p>Refresh resets everything. No study data, account, cloud or saved progress is used. This is a few-minute flow test, not the full 20–30-minute adventure.</p><button id="reset">Restart playtest</button><button id="defeat">Simulate defeat</button><pre id="debug"></pre></details>
+    <p>Sprites: Kenney Tiny Dungeon (CC0), from the selected visual comparison. <a href="assets/Kenney-LICENSE.txt">License</a>. Movement and effects are authored.</p>
+  </aside>
+</main>
+<nav class="switcher" aria-label="Combat pacing comparison"><button id="prev" aria-label="Previous pacing">←</button><span id="mode"></span><button id="next" aria-label="Next pacing">→</button></nav>
+<script src="combat.js" type="module"></script>
+</html>

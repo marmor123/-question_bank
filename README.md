@@ -19,6 +19,8 @@ Production implementation follows that planning effort.
 - [Agent instructions](AGENTS.md): engineering skills configuration.
 
 Track decision maps and tickets in [GitHub Issues](https://github.com/marmor123/-question_bank/issues).
+The active map is [Plan the first playable study RPG adventure](https://github.com/marmor123/-question_bank/issues/1).
+Its child issues and native dependencies show which decisions can be worked next.
 Existing study-app progress is not imported into the game. Local question datasets,
 source PDFs, generated outputs, and credentials are excluded from version control.
 

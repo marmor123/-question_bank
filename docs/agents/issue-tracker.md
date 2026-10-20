@@ -27,7 +27,7 @@ GitHub shares one number space between issues and pull requests. Resolve ambiguo
 - Map: a single issue labelled wayfinder:map. Its body contains Destination, Notes, Decisions so far, Not yet specified, and Out of scope.
 - Child tickets: link issues to the map using GitHub native sub-issues. Use labels wayfinder:research, wayfinder:prototype, wayfinder:grilling, or wayfinder:task.
 - Create tickets before wiring dependencies.
-- To attach a child: POST repos/marmor123/-question_bank/issues/<map-number>/sub_issues with issue_id equal to the child's numeric database ID.
+- To attach a child: POST repos/marmor123/-question_bank/issues/<map-number>/sub_issues with sub_issue_id equal to the child's numeric database ID.
 - Blocking: use native GitHub issue dependencies. POST repos/marmor123/-question_bank/issues/<blocked-number>/dependencies/blocked_by with issue_id equal to the blocker's numeric database ID, not its issue number or node ID.
 - Retrieve numeric database IDs with gh api repos/marmor123/-question_bank/issues/<number> --jq .id.
 - If native sub-issues are unavailable, maintain a task list of children in the map and a Part of reference in each child. If native dependencies are unavailable, use explicit Blocked by references in ticket bodies.
